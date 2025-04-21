@@ -1,0 +1,8 @@
+Flask
+gunicorn
+flask_sqlalchemy
+flask_cors
+joblib
+psycopg2-binary
+openai
+numpy
