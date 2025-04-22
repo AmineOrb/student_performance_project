@@ -22,16 +22,13 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Database configuration
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:5432/postgres'
 
-# Database configuration
-database_url = os.environ.get('DATABASE_URL')
-if database_url:
-    # For Render (or other production) environment
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-else:
-    # For local development with Supabase
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:5432/postgres?sslmode=require'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
+
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_pre_ping": True,
+}
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
