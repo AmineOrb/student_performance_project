@@ -21,15 +21,9 @@ app = Flask(__name__)
 # CORS Configuration
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
+
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:5432/postgres'
-
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
-
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_pre_ping": True,
-}
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2025@localhost/student_performance_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 db = SQLAlchemy(app)
