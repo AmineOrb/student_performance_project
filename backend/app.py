@@ -22,7 +22,8 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:6543/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:5432/postgres'
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
