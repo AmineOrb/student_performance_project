@@ -25,8 +25,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Amine2025@@db.avgboakdzhkltpwkuezx.supabase.co:6543/postgres'
 
 
-
-
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'YOUR_SECRET_KEY'
 db = SQLAlchemy(app)
