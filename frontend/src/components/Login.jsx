@@ -13,29 +13,20 @@ function Login() {
     setError("");
     axios.post("http://127.0.0.1:5000/login", { email, password })
       .then((res) => {
-        // Destructure the response
-        // Note: We now expect 'student_id' to be returned from the backend for student users.
         const { role, user_id, name, teacher_id, student_id } = res.data;
         if (role === "admin") {
           localStorage.setItem("adminName", name);
           localStorage.setItem("adminId", user_id);
           navigate("/admin-dashboard");
         } else if (role === "teacher") {
-          // Store teacher info
           localStorage.setItem("teacherName", name);
-          localStorage.setItem("teacherId", teacher_id); // Must match the "teacher_id" from backend
+          localStorage.setItem("teacherId", teacher_id);
           localStorage.setItem("teacherUserId", user_id);
           navigate("/");
         } else if (role === "student") {
           localStorage.setItem("studentName", name);
-          // IMPORTANT: Store the student table ID (student_id), not the user_id
-          localStorage.setItem("studentName", name);
-          
-          
           localStorage.setItem("studentId", student_id);
-
-          localStorage.setItem("studentUserId", user_id); 
-
+          localStorage.setItem("studentUserId", user_id);
           navigate("/student-dashboard");
         }
       })
@@ -50,37 +41,44 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-      {error && <div className="text-red-500 mb-2">{error}</div>}
-      <form onSubmit={handleLogin}>
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold">Email</label>
-          <input
-            type="email"
-            className="border p-2 w-full rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-1 font-semibold">Password</label>
-          <input
-            type="password"
-            className="border p-2 w-full rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-600 transition-colors"
-        >
-          Login
-        </button>
-      </form>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url('/images/logIn_photo.jpg')` }}
+    >
+      <div className="bg-white bg-opacity-40 backdrop-blur-md px-10 py-12 rounded-3xl shadow-2xl max-w-md w-full">
+        <h2 className="text-4xl font-bold text-center mb-8 text-black drop-shadow-md">
+          Welcome Back
+        </h2>
+        {error && <div className="text-red-600 mb-4 text-center">{error}</div>}
+        <form onSubmit={handleLogin}>
+          <div className="mb-6">
+            <label className="block text-black font-semibold mb-2">Email</label>
+            <input
+              type="email"
+              className="w-full p-3 rounded-lg bg-white bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-8">
+            <label className="block text-black font-semibold mb-2">Password</label>
+            <input
+              type="password"
+              className="w-full p-3 rounded-lg bg-white bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition duration-300"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
